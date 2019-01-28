@@ -20,23 +20,29 @@ import com.ztesoft.zsmart.core.utils.StringUtil;
  */
 public class FileCopyUtil {
     /**eclipse 工作空间*/
-    private static final String fromHead = "E:/space/v8_mtn/1037206/branches/main_branch/bcare/java/src/";
-    private static final String toHead = "E:/space/v8_mtn/mtn_java/src/";
-    private static final String cutString = "   branches/main_branch/bcare/java/src/";
+    private static final String fromHead = "D:/idea-space/v8-space/public-cvbs-dev/";
+//    private static final String fromHead = "D:/idea-space/v8-space/zimb-mi-new/";
+    private static final String toHead = "F:/work-space/cmo-code/1502406/branches/main_branch/";
+//    private static final String toHead = "F:/work-space/cmo-code/1494492/branches/main_branch/";
+    private static final String cutString = "   branches/main_branch/";
     
     public static void main(String[] args) throws IOException{
         FileReader fr = null;
         BufferedReader br = null;
         
         try {
-            URL fileUrl = FileCopyUtil.class.getClassLoader().getResource("svnlist.txt");
+            //URL fileUrl = FileCopyUtil.class.getClassLoader().getResource("svnlist.txt");
             //1.读取文件
-            File svnListFile = new File(fileUrl.getFile());
+            File svnListFile = new File("F:\\space\\zsmart-util\\ZSMARTUtil\\src\\main\\java\\svnlist.txt");
             fr = new FileReader(svnListFile);
             br = new BufferedReader(fr);
             
             String line = br.readLine(); 
             while (StringUtil.isNotEmpty(line)) {
+                if (line.endsWith("/") || line.endsWith(".properties")) {
+                    line = br.readLine();
+                    continue;
+                }
                 
                 String withoutOpetaionString = line.substring(1, line.length());
                 String cutResultString = withoutOpetaionString.replaceAll(cutString, "");
